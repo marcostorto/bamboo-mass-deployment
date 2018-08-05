@@ -16,6 +16,7 @@
 
 		<resource type="download" name="bamboo_mass_deploy.css" location="/css/bamboo_mass_deploy.css"/>
 		<resource type="download" name="bamboo_mass_deploy.js" location="/js/bamboo_mass_deploy.js"/>
+		<resource type="download" name="bjs.cookie.js" location="/js/js.cookie.js"/>
 		<resource type="download" name="images/" location="/images"/>
 
 		<context>bamboo_mass_deploy</context>

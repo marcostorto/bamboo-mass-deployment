@@ -25,7 +25,7 @@ import java.util.stream.Collectors;
  */
 public class DeploymentSetupForm extends BambooActionSupport {
 
-	private static final String DEFAULT_ENV_FILTER = "AWS";
+	private static final String DEFAULT_ENV_FILTER = "";
 	private static final long serialVersionUID = 2365222749104955291L;
 
 	private final DeploymentProjectService deploymentProjectService;

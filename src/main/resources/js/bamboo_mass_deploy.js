@@ -6,6 +6,7 @@
 	};
 
 	var SUBMIT_URL = 'deploymentExecution.action',
+		RESULTS_URL = 'deploymentResultsForm.action',
 		pages = {
 			form: formPageInit,
 			results: resultsPageInit
@@ -17,6 +18,7 @@
 	function formPageInit() {
 
 		var $selectCheckboxes = $(_provide('select-project-checkbox')),
+			$selectAllCheckbox = $(_provide('select-all-checkbox')),
 			$deployButton = $(_provide('deploy-button')),
 			$safetyCheckbox = $(_provide('safety-check')),
 			$envListFrom = $(_provide('environment-list-from')),
@@ -44,12 +46,27 @@
 			changeSubmitButtonState();
 		});
 
+		$selectAllCheckbox.change(function () {
+			$.each($selectCheckboxes, function (i, item) {
+				var $item = $(item);
+				$item.prop('checked', $selectAllCheckbox.prop('checked'))
+			});
+			recalculateParams();
+			changeSubmitButtonState();
+		});
+
 		$safetyCheckbox.change(function () {
 			changeSubmitButtonState();
 		});
 
 		$deployButton.click(function () {
-			window.location.href = SUBMIT_URL + '?params=' + urlParams.join(';');
+			form = $('<form>', {
+                    method: 'post',
+                    action: SUBMIT_URL + '?params=' + urlParams.join(';') +
+                    	"&atl_token=" + Cookies.get('atl.xsrf.token') + "&atl_token_source=js"
+                });
+			$(document.body).append(form);
+        	form.submit();
 		});
 
 		$envFilterInput.change(function () {

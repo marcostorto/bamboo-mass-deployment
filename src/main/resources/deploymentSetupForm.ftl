@@ -56,10 +56,18 @@ ${webResourceManager.requireResource("au.com.agic.bamboo_mass_deploy:bamboo_mass
 				<th>Latest version deployed to `${fromEnv}`</th>
 				<th>Version creation date</th>
 				<th>Promote to `${toEnv}`</th>
+
 			</tr>
 			</thead>
 
 			<tbody>
+				<tr>
+					<td></td>
+					<td></td>
+					<td></td>
+					<td><input data-provide="select-all-checkbox" data-code="all" type="checkbox"/> All</td>
+				</tr>
+
 				[#list deploymentObjects as deployment]
 
 				<tr>
@@ -82,6 +90,7 @@ ${webResourceManager.requireResource("au.com.agic.bamboo_mass_deploy:bamboo_mass
 					<td>
 						<input data-provide="select-project-checkbox" data-code="${deployment.code}" type="checkbox"/>
 					</td>
+
 				</tr>
 
 				[/#list]
