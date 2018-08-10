@@ -79,7 +79,7 @@ public class DeploymentExecution extends BambooActionSupport {
 				Environment environment = environmentService.getEnvironment(Long.parseLong(param[1], 10));
 				DeploymentVersion deploymentVersion = deploymentVersionService.getDeploymentVersion(Long.parseLong(param[2], 10));
 
-				DeploymentObject deploymentObject = new DeploymentObject(null, environment, deploymentVersion, null);
+				DeploymentObject deploymentObject = new DeploymentObject(null, environment, deploymentVersion, null,null);
 				deploymentObject.serialize();
 
 				result.add(deploymentObject);

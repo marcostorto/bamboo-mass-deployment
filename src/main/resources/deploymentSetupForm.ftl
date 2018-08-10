@@ -55,6 +55,7 @@ ${webResourceManager.requireResource("au.com.agic.bamboo_mass_deploy:bamboo_mass
 				<th>Deployment project</th>
 				<th>Latest version deployed to `${fromEnv}`</th>
 				<th>Version creation date</th>
+				<th>Latest version deployed to `${toEnv}`</th>
 				<th>Promote to `${toEnv}`</th>
 
 			</tr>
@@ -65,7 +66,11 @@ ${webResourceManager.requireResource("au.com.agic.bamboo_mass_deploy:bamboo_mass
 					<td></td>
 					<td></td>
 					<td></td>
-					<td><input data-provide="select-all-checkbox" data-code="all" type="checkbox"/> All</td>
+					<td></td>
+					<td>
+						<input data-provide="select-all-checkbox" data-code="all" type="checkbox"/><b>All</b><br>
+						<input data-provide="select-changed-checkbox" data-code="all" type="checkbox"/><b>Changed</b>
+					</td>
 				</tr>
 
 				[#list deploymentObjects as deployment]
@@ -88,9 +93,19 @@ ${webResourceManager.requireResource("au.com.agic.bamboo_mass_deploy:bamboo_mass
 					</td>
 
 					<td>
+						<a href="${baseUrl}/deploy/viewDeploymentVersion.action?versionId=${deployment.currentVersion.id}">
+							${deployment.currentVersion.name}
+						</a>
+					</td>
+				[#if deployment.currentVersion.id != deployment.version.id]
+					<td>
+						<input data-provide="select-project-checkbox" data-changed="true" data-code="${deployment.code}" type="checkbox"/>
+					</td>
+				[#else]
+					<td>
 						<input data-provide="select-project-checkbox" data-code="${deployment.code}" type="checkbox"/>
 					</td>
-
+				[/#if]
 				</tr>
 
 				[/#list]

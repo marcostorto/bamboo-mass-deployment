@@ -111,12 +111,18 @@ public class DeploymentSetupForm extends BambooActionSupport {
 			if (fromEnvironment != null && toEnvironment != null) {
 				DeploymentResult deploymentResult =
 					deploymentResultService.getLatestDeploymentResultForEnvironment(fromEnvironment.getId());
+				DeploymentResult lastDeploymentResult =
+					deploymentResultService.getLatestDeploymentResultForEnvironment(toEnvironment.getId());
 
 				if (deploymentResult != null) {
 					DeploymentVersion deploymentVersion = deploymentResult.getDeploymentVersion();
+					DeploymentVersion currentVersion = null;
+					if (lastDeploymentResult != null) {
+						currentVersion = lastDeploymentResult.getDeploymentVersion();
+					}
 					if (deploymentVersion != null) {
 						DeploymentObject deploymentObject =
-							new DeploymentObject(deploymentProject, toEnvironment, deploymentVersion, null);
+							new DeploymentObject(deploymentProject, toEnvironment, deploymentVersion, currentVersion,null);
 						deploymentObject.serialize();
 
 						deploymentObjects.add(deploymentObject);

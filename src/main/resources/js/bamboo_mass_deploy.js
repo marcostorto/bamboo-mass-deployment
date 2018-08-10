@@ -18,6 +18,7 @@
 	function formPageInit() {
 
 		var $selectCheckboxes = $(_provide('select-project-checkbox')),
+			$selectChangedCheckboxes = $('[data-changed="true"]')
 			$selectAllCheckbox = $(_provide('select-all-checkbox')),
 			$deployButton = $(_provide('deploy-button')),
 			$safetyCheckbox = $(_provide('safety-check')),
@@ -48,6 +49,15 @@
 
 		$selectAllCheckbox.change(function () {
 			$.each($selectCheckboxes, function (i, item) {
+				var $item = $(item);
+				$item.prop('checked', $selectAllCheckbox.prop('checked'))
+			});
+			recalculateParams();
+			changeSubmitButtonState();
+		});
+
+		$selectChangedCheckbox.change(function () {
+			$.each($selectChangedCheckboxes, function (i, item) {
 				var $item = $(item);
 				$item.prop('checked', $selectAllCheckbox.prop('checked'))
 			});

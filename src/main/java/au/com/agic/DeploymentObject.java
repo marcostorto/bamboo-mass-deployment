@@ -15,6 +15,7 @@ public class DeploymentObject {
 	private DeploymentProject project;
 	private Environment targetEnvironment;
 	private DeploymentVersion version;
+	private DeploymentVersion currentVersion;
 	private DeploymentResult result;
 	private String code;
 
@@ -32,6 +33,14 @@ public class DeploymentObject {
 
 	public void setVersion(final DeploymentVersion version) {
 		this.version = version;
+	}
+
+	public DeploymentVersion getCurrentVersion() {
+		return currentVersion;
+	}
+
+	public void setCurrentVersion(final DeploymentVersion currentVersion) {
+		this.currentVersion = currentVersion;
 	}
 
 	public DeploymentProject getProject() {
@@ -55,11 +64,12 @@ public class DeploymentObject {
 	}
 
 	public DeploymentObject(final DeploymentProject project, final Environment targetEnvironment,
-		final DeploymentVersion version, final DeploymentResult result) {
+		final DeploymentVersion version, final DeploymentVersion currentVersion, final DeploymentResult result) {
 
 		this.project = project;
 		this.targetEnvironment = targetEnvironment;
 		this.version = version;
+		this.currentVersion = currentVersion;
 		this.result = result;
 	}
 
@@ -74,6 +84,7 @@ public class DeploymentObject {
 		code = getSerializedId(project);
 		code += ":" + getSerializedId(targetEnvironment);
 		code += ":" + getSerializedId(version);
+		//code += ":" + getSerializedId(currentVersion);
 		code += ":" + getSerializedId(result);
 		return code;
 	}

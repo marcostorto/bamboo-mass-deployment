@@ -89,7 +89,7 @@ public class DeploymentResultsForm extends BambooActionSupport {
 				}
 
 				DeploymentObject deploymentObject =
-					new DeploymentObject(deploymentProject, environment, deploymentVersion, deploymentResult);
+					new DeploymentObject(deploymentProject, environment, deploymentVersion, null, deploymentResult);
 				
 				deploymentObject.serialize();
 
